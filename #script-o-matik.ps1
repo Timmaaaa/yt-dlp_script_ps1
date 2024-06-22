@@ -1,12 +1,15 @@
 ﻿$myDrive = (Get-CimInstance Win32_Volume | Where DeviceID -eq "\\?\Volume{245d9bef-6298-4269-af05-a614944bc3db}\").DriveLetter
 
 #take csv n put in variable. Turns out as array
+#Playlist links in are in the csv
 $MyList= Import-Csv "$($myDrive)\Programme\p\pls.csv"
 
 echo ""
 
 #Shuffle your array content but keep them in the same array
 $MyList = $MyList | Sort-Object {Get-Random}
+#Shuffle'n, sodass Playlisten in zufälliger Reihenfolge gedownloaded werden.
+#Bei mehrfachem Scriptstart entstehen so weniger Kollisionen.
 
 cd "$($myDrive)\Programme\p\yt_dlp\"
 
